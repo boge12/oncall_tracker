@@ -1,0 +1,89 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #0a0e1a;
+  --color-surface: #141927;
+  --color-surface-hover: #1c2237;
+  --color-border: #2a3050;
+  --color-text: #e8eaf0;
+  --color-text-muted: #8890a8;
+  --color-stat: #ef4444;
+  --color-urgent: #f59e0b;
+  --color-routine: #3b82f6;
+  --color-followup: #f59e0b;
+  --color-done: #22c55e;
+  --color-accent: #6366f1;
+}
+
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+html, body {
+  overscroll-behavior: none;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
+  background-color: #0a0e1a;
+  color: #e8eaf0;
+  margin: 0;
+  padding: 0;
+}
+
+@layer utilities {
+  .pt-safe {
+    padding-top: env(safe-area-inset-top);
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+  }
+  .bottom-safe {
+    bottom: env(safe-area-inset-bottom);
+  }
+}
+
+@keyframes pulse-border {
+  0%, 100% { border-color: #ef4444; opacity: 1; }
+  50% { border-color: #ef4444; opacity: 0.4; }
+}
+
+@keyframes sheet-up {
+  from { transform: translateY(100%); }
+  to { transform: translateY(0); }
+}
+
+@keyframes sheet-down {
+  from { transform: translateY(0); }
+  to { transform: translateY(100%); }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes fade-out {
+  from { opacity: 1; }
+  to { opacity: 0; }
+}
+
+.animate-pulse-border {
+  animation: pulse-border 2s ease-in-out infinite;
+}
+
+.animate-sheet-up {
+  animation: sheet-up 0.4s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.animate-sheet-down {
+  animation: sheet-down 0.3s cubic-bezier(0.32, 0.72, 0, 1) forwards;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.2s ease-out forwards;
+}
+
+.animate-fade-out {
+  animation: fade-out 0.2s ease-out forwards;
+}
