@@ -48,34 +48,51 @@ export default function PageCard({ page, dispatch, isFollowUp }) {
     >
       {/* Collapsed view */}
       <div className="px-4 py-3">
-        <div className="flex items-start justify-between gap-2">
-          <div className="flex items-center gap-2 flex-wrap min-w-0">
-            <span className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${sourceBadgeColors[page.source]}`}>
-              {page.source}
-            </span>
-            {isStat && (
-              <span className="text-[10px] font-bold uppercase text-stat">STAT</span>
-            )}
-          </div>
-          <span className="text-xs text-text-muted whitespace-nowrap">{elapsed}</span>
-        </div>
+        <div className="flex items-start gap-3">
+          {/* Done checkbox */}
+          <label
+            className="flex items-center justify-center min-w-[44px] min-h-[44px] shrink-0 cursor-pointer mt-0.5"
+            onClick={e => e.stopPropagation()}
+          >
+            <input
+              type="checkbox"
+              checked={false}
+              onChange={() => handleStatus('done')}
+              className="w-5 h-5 rounded border-border accent-done cursor-pointer"
+            />
+          </label>
 
-        <p className="text-base font-semibold text-text mt-1.5 truncate">{page.patientName}</p>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-start justify-between gap-2">
+              <div className="flex items-center gap-2 flex-wrap min-w-0">
+                <span className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${sourceBadgeColors[page.source]}`}>
+                  {page.source}
+                </span>
+                {isStat && (
+                  <span className="text-[10px] font-bold uppercase text-stat">STAT</span>
+                )}
+              </div>
+              <span className="text-xs text-text-muted whitespace-nowrap">{elapsed}</span>
+            </div>
 
-        <div className="flex items-center gap-3 mt-1 text-sm text-text-muted">
-          {page.location && <span>{page.location}</span>}
-          {page.callbackNumber && (
-            <a
-              href={`tel:${page.callbackNumber}`}
-              onClick={handleCallbackClick}
-              className="text-accent underline min-h-[44px] min-w-[44px] flex items-center"
-            >
-              {page.callbackNumber}
-              {page.callbackLoggedAt && (
-                <span className="ml-1 text-done text-[10px]">&#10003;</span>
+            <p className="text-base font-semibold text-text mt-1.5 truncate">{page.patientName}</p>
+
+            <div className="flex items-center gap-3 mt-1 text-sm text-text-muted">
+              {page.location && <span>{page.location}</span>}
+              {page.callbackNumber && (
+                <a
+                  href={`tel:${page.callbackNumber}`}
+                  onClick={handleCallbackClick}
+                  className="text-accent underline min-h-[44px] min-w-[44px] flex items-center"
+                >
+                  {page.callbackNumber}
+                  {page.callbackLoggedAt && (
+                    <span className="ml-1 text-done text-[10px]">&#10003;</span>
+                  )}
+                </a>
               )}
-            </a>
-          )}
+            </div>
+          </div>
         </div>
       </div>
 
