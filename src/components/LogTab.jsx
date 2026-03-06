@@ -62,7 +62,7 @@ export default function LogTab({ pages, dispatch }) {
               key={page.id}
               className="bg-surface rounded-lg px-4 py-3 flex items-center justify-between"
             >
-              <div className="min-w-0">
+              <div className="min-w-0 flex-1">
                 <p className="text-sm font-medium text-text truncate">{page.patientName}</p>
                 <div className="flex items-center gap-2 text-xs text-text-muted mt-0.5">
                   {page.location && <span>{page.location}</span>}
@@ -77,6 +77,16 @@ export default function LogTab({ pages, dispatch }) {
               <span className="text-xs text-text-muted whitespace-nowrap ml-3">
                 {formatTime(page.resolvedAt)}
               </span>
+              <button
+                onClick={() => dispatch({ type: 'SET_STATUS', payload: { id: page.id, status: 'active' } })}
+                className="min-h-[44px] min-w-[44px] flex items-center justify-center text-text-muted active:text-accent ml-1 shrink-0"
+                aria-label="Move back to active"
+              >
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                  <polyline points="1 4 1 10 7 10" />
+                  <path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10" />
+                </svg>
+              </button>
             </div>
           ))}
         </div>

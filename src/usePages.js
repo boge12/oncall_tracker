@@ -45,6 +45,9 @@ function reducer(state, action) {
         if (action.payload.status === 'done') {
           updates.resolvedAt = new Date().toISOString()
         }
+        if (action.payload.status === 'active') {
+          updates.resolvedAt = null
+        }
         return { ...p, ...updates }
       })
     }
