@@ -125,6 +125,19 @@ export default function PageCard({ page, dispatch, isFollowUp }) {
             />
           </div>
 
+          {/* Callback Number */}
+          <div className="mt-3">
+            <p className="text-xs font-medium text-text-muted uppercase mb-1">Callback Number</p>
+            <input
+              type="text"
+              inputMode="tel"
+              value={page.callbackNumber}
+              onChange={e => dispatch({ type: 'UPDATE_PAGE', payload: { id: page.id, updates: { callbackNumber: e.target.value } } })}
+              placeholder="Callback number"
+              className="w-full bg-bg rounded-md border border-border px-3 py-2 text-sm text-text placeholder-text-muted outline-none focus:border-accent"
+            />
+          </div>
+
           {/* Todos */}
           <div className="mt-3">
             <p className="text-xs font-medium text-text-muted uppercase mb-1">Todos</p>
