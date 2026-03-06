@@ -16,7 +16,7 @@ export default function LogTab({ pages, dispatch }) {
   }
 
   function handleClearAll() {
-    if (window.confirm('Clear all logged pages? This cannot be undone.')) {
+    if (window.confirm('Clear all logged items? This cannot be undone.')) {
       dispatch({ type: 'DELETE_ALL_DONE' })
     }
   }
@@ -54,7 +54,7 @@ export default function LogTab({ pages, dispatch }) {
 
       {/* List */}
       {done.length === 0 ? (
-        <p className="text-sm text-text-muted py-8 text-center">No completed pages</p>
+        <p className="text-sm text-text-muted py-8 text-center">No completed items</p>
       ) : (
         <div className="space-y-2">
           {done.map(page => (
@@ -63,7 +63,16 @@ export default function LogTab({ pages, dispatch }) {
               className="bg-surface rounded-lg px-4 py-3 flex items-center justify-between"
             >
               <div className="min-w-0 flex-1">
-                <p className="text-sm font-medium text-text truncate">{page.patientName}</p>
+                <div className="flex items-center gap-2">
+                  <span className={`text-[10px] font-bold uppercase px-1.5 py-0.5 rounded ${
+                    (page.type || 'page') === 'consult'
+                      ? 'bg-sky-500/20 text-sky-300'
+                      : 'bg-emerald-500/20 text-emerald-300'
+                  }`}>
+                    {(page.type || 'page') === 'consult' ? 'consult' : 'page'}
+                  </span>
+                  <p className="text-sm font-medium text-text truncate">{page.patientName}</p>
+                </div>
                 <div className="flex items-center gap-2 text-xs text-text-muted mt-0.5">
                   {page.location && <span>{page.location}</span>}
                   {page.billingCode && (

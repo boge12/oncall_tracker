@@ -1,6 +1,7 @@
 export default function Header({ activeTab, onTabChange }) {
   const tabs = [
-    { id: 'active', label: 'ACTIVE' },
+    { id: 'pages', label: 'PAGES' },
+    { id: 'consults', label: 'CONSULTS' },
     { id: 'log', label: 'LOG' }
   ]
 

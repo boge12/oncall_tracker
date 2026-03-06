@@ -1,11 +1,14 @@
 import { sortPages } from '../utils'
 import PageCard from './PageCard'
 
-export default function ActiveTab({ pages, dispatch }) {
-  const pending = sortPages(pages.filter(p => p.status === 'active'))
-  const followUp = pages.filter(p => p.status === 'followup').sort(
+export default function ActiveTab({ pages, dispatch, type = 'page' }) {
+  const filtered = pages.filter(p => (p.type || 'page') === type)
+  const pending = sortPages(filtered.filter(p => p.status === 'active'))
+  const followUp = filtered.filter(p => p.status === 'followup').sort(
     (a, b) => new Date(a.createdAt) - new Date(b.createdAt)
   )
+
+  const label = type === 'consult' ? 'consults' : 'pages'
 
   return (
     <div className="flex-1 overflow-y-auto px-4 py-4 space-y-6 pb-24">
@@ -15,7 +18,7 @@ export default function ActiveTab({ pages, dispatch }) {
           Pending{pending.length > 0 && ` (${pending.length})`}
         </h2>
         {pending.length === 0 ? (
-          <p className="text-sm text-text-muted py-8 text-center">No pending pages</p>
+          <p className="text-sm text-text-muted py-8 text-center">No pending {label}</p>
         ) : (
           <div className="space-y-3">
             {pending.map(page => (

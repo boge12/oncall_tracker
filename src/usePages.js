@@ -18,6 +18,7 @@ function reducer(state, action) {
       const page = {
         id: generateId(),
         createdAt: new Date().toISOString(),
+        type: action.payload.type || 'page',
         source: action.payload.source || 'haiku',
         priority: action.payload.priority || 'urgent',
         patientName: action.payload.patientName || '',

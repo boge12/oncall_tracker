@@ -36,7 +36,7 @@ const priorityColors = {
   routine: 'bg-routine/20 text-routine'
 }
 
-export default function AddSheet({ open, onClose, dispatch }) {
+export default function AddSheet({ open, onClose, dispatch, itemType = 'page' }) {
   const [closing, setClosing] = useState(false)
   const [showMore, setShowMore] = useState(false)
   const [form, setForm] = useState({
@@ -78,6 +78,7 @@ export default function AddSheet({ open, onClose, dispatch }) {
     dispatch({
       type: 'ADD_PAGE',
       payload: {
+        type: itemType,
         source: form.source,
         priority: form.priority,
         patientName: form.patientName.trim(),
@@ -258,7 +259,7 @@ export default function AddSheet({ open, onClose, dispatch }) {
             disabled={!form.patientName.trim()}
             className="w-full min-h-[52px] rounded-lg bg-accent text-white font-semibold text-base disabled:opacity-40 active:scale-[0.98] transition-transform"
           >
-            LOG PAGE
+            {itemType === 'consult' ? 'LOG CONSULT' : 'LOG PAGE'}
           </button>
         </form>
       </div>
