@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { generateId } from '../utils'
 
-const sourceOptions = ['haiku', 'text', 'page']
+const sourceOptions = ['haiku', 'page']
 const priorityOptions = ['stat', 'urgent', 'routine']
 
 function ToggleGroup({ options, value, onChange, colorMap }) {
@@ -27,7 +27,6 @@ function ToggleGroup({ options, value, onChange, colorMap }) {
 
 const sourceColors = {
   haiku: 'bg-purple-500/20 text-purple-300',
-  text: 'bg-blue-500/20 text-blue-300',
   page: 'bg-emerald-500/20 text-emerald-300'
 }
 

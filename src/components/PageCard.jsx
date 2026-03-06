@@ -4,7 +4,6 @@ import TodoList from './TodoList'
 
 const sourceBadgeColors = {
   haiku: 'bg-purple-500/20 text-purple-300',
-  text: 'bg-blue-500/20 text-blue-300',
   page: 'bg-emerald-500/20 text-emerald-300'
 }
 
