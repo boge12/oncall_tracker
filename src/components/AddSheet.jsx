@@ -71,9 +71,12 @@ export default function AddSheet({ open, onClose, dispatch, itemType = 'page' })
     setForm(f => ({ ...f, todoText: '' }))
   }
 
+  const isPage = itemType === 'page'
+  const canSubmit = isPage ? form.callbackNumber.trim() : form.patientName.trim()
+
   function handleSubmit(e) {
     e.preventDefault()
-    if (!form.patientName.trim()) return
+    if (!canSubmit) return
 
     dispatch({
       type: 'ADD_PAGE',
@@ -151,34 +154,69 @@ export default function AddSheet({ open, onClose, dispatch, itemType = 'page' })
             />
           </div>
 
-          {/* Patient name */}
-          <input
-            type="text"
-            value={form.patientName}
-            onChange={e => handleField('patientName', e.target.value)}
-            placeholder="Patient Name"
-            autoCapitalize="words"
-            className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-lg text-text placeholder-text-muted outline-none focus:border-accent mb-3"
-          />
+          {isPage ? (
+            <>
+              {/* Callback first for pages */}
+              <input
+                type="text"
+                inputMode="tel"
+                value={form.callbackNumber}
+                onChange={e => handleField('callbackNumber', e.target.value)}
+                placeholder="Callback Number"
+                className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-lg text-text placeholder-text-muted outline-none focus:border-accent mb-3"
+              />
 
-          {/* Location */}
-          <input
-            type="text"
-            value={form.location}
-            onChange={e => handleField('location', e.target.value)}
-            placeholder="Location (e.g. 4N 412)"
-            className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-sm text-text placeholder-text-muted outline-none focus:border-accent mb-3"
-          />
+              {/* Patient name (optional for pages) */}
+              <input
+                type="text"
+                value={form.patientName}
+                onChange={e => handleField('patientName', e.target.value)}
+                placeholder="Patient Name (optional)"
+                autoCapitalize="words"
+                className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-sm text-text placeholder-text-muted outline-none focus:border-accent mb-3"
+              />
 
-          {/* Callback */}
-          <input
-            type="text"
-            inputMode="tel"
-            value={form.callbackNumber}
-            onChange={e => handleField('callbackNumber', e.target.value)}
-            placeholder="Callback Number"
-            className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-sm text-text placeholder-text-muted outline-none focus:border-accent mb-3"
-          />
+              {/* Location */}
+              <input
+                type="text"
+                value={form.location}
+                onChange={e => handleField('location', e.target.value)}
+                placeholder="Location (e.g. 4N 412)"
+                className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-sm text-text placeholder-text-muted outline-none focus:border-accent mb-3"
+              />
+            </>
+          ) : (
+            <>
+              {/* Patient name first for consults */}
+              <input
+                type="text"
+                value={form.patientName}
+                onChange={e => handleField('patientName', e.target.value)}
+                placeholder="Patient Name"
+                autoCapitalize="words"
+                className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-lg text-text placeholder-text-muted outline-none focus:border-accent mb-3"
+              />
+
+              {/* Location */}
+              <input
+                type="text"
+                value={form.location}
+                onChange={e => handleField('location', e.target.value)}
+                placeholder="Location (e.g. 4N 412)"
+                className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-sm text-text placeholder-text-muted outline-none focus:border-accent mb-3"
+              />
+
+              {/* Callback */}
+              <input
+                type="text"
+                inputMode="tel"
+                value={form.callbackNumber}
+                onChange={e => handleField('callbackNumber', e.target.value)}
+                placeholder="Callback Number"
+                className="w-full bg-bg rounded-lg border border-border px-4 py-3 text-sm text-text placeholder-text-muted outline-none focus:border-accent mb-3"
+              />
+            </>
+          )}
 
           {/* More section */}
           <button
@@ -256,7 +294,7 @@ export default function AddSheet({ open, onClose, dispatch, itemType = 'page' })
           {/* Submit */}
           <button
             type="submit"
-            disabled={!form.patientName.trim()}
+            disabled={!canSubmit}
             className="w-full min-h-[52px] rounded-lg bg-accent text-white font-semibold text-base disabled:opacity-40 active:scale-[0.98] transition-transform"
           >
             {itemType === 'consult' ? 'LOG CONSULT' : 'LOG PAGE'}

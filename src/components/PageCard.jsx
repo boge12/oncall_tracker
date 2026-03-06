@@ -74,7 +74,9 @@ export default function PageCard({ page, dispatch, isFollowUp }) {
               <span className="text-xs text-text-muted whitespace-nowrap">{elapsed}</span>
             </div>
 
-            <p className="text-base font-semibold text-text mt-1.5 truncate">{page.patientName}</p>
+            <p className="text-base font-semibold text-text mt-1.5 truncate">
+              {page.patientName || page.callbackNumber || 'Unknown'}
+            </p>
 
             <div className="flex items-center gap-3 mt-1 text-sm text-text-muted">
               {page.location && <span>{page.location}</span>}
