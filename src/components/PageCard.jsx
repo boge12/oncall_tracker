@@ -100,13 +100,36 @@ export default function PageCard({ page, dispatch, isFollowUp }) {
       {/* Expanded view */}
       {expanded && (
         <div className="px-4 pb-4 border-t border-border" onClick={e => e.stopPropagation()}>
+          {/* Patient Name */}
+          <div className="mt-3">
+            <p className="text-xs font-medium text-text-muted uppercase mb-1">Patient Name</p>
+            <input
+              type="text"
+              value={page.patientName}
+              onChange={e => dispatch({ type: 'UPDATE_PAGE', payload: { id: page.id, updates: { patientName: e.target.value } } })}
+              placeholder="Add patient name..."
+              autoCapitalize="words"
+              className="w-full bg-bg rounded-md border border-border px-3 py-2 text-sm text-text placeholder-text-muted outline-none focus:border-accent"
+            />
+          </div>
+
+          {/* Location */}
+          <div className="mt-3">
+            <p className="text-xs font-medium text-text-muted uppercase mb-1">Location</p>
+            <input
+              type="text"
+              value={page.location}
+              onChange={e => dispatch({ type: 'UPDATE_PAGE', payload: { id: page.id, updates: { location: e.target.value } } })}
+              placeholder="e.g. 4N 412"
+              className="w-full bg-bg rounded-md border border-border px-3 py-2 text-sm text-text placeholder-text-muted outline-none focus:border-accent"
+            />
+          </div>
+
           {/* Todos */}
-          {(page.todos.length > 0 || true) && (
-            <div className="mt-3">
-              <p className="text-xs font-medium text-text-muted uppercase mb-1">Todos</p>
-              <TodoList todos={page.todos} pageId={page.id} dispatch={dispatch} />
-            </div>
-          )}
+          <div className="mt-3">
+            <p className="text-xs font-medium text-text-muted uppercase mb-1">Todos</p>
+            <TodoList todos={page.todos} pageId={page.id} dispatch={dispatch} />
+          </div>
 
           {/* Notes */}
           <div className="mt-3">
